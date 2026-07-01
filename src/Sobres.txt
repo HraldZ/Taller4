@@ -1,0 +1,4 @@
+Mega Mawile-Ex;5;Pokemon;260;3
+Premium Power Pro;2;Item;30
+Lillie's Determination;2;Supporter;3
+Basic Energy;1;Energy;Fight

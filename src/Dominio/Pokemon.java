@@ -1,0 +1,16 @@
+package Dominio;
+
+public class Pokemon extends Carta {
+
+	protected int dano;
+	protected int cantEnergia;
+	public Pokemon(String nombre, int rareza, String tipo, int dano, int cantEnergia) {
+		super(nombre, rareza, tipo);
+		this.dano = dano;
+		this.cantEnergia = cantEnergia;
+	}
+	
+	
+	
+	
+}
