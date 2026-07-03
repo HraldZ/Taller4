@@ -16,20 +16,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Dominio.Sistema;
 
 
 public class VentanaPrincipal extends JFrame {
 	
-	public Sistema sistema;
-	
 	public static Color blanco  = Color.WHITE;
 	public static Color azul    = new Color(52, 100, 180);
 	
-	
 
-
-	
 	public VentanaPrincipal() throws HeadlessException {
 		super("Pokemon TGC");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,8 +34,6 @@ public class VentanaPrincipal extends JFrame {
         setContentPane(createGui());
 	}
 
-
-	// Llama a todo y se muestra en el main
 	public JPanel createGui() {
 		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBackground(blanco);
@@ -75,7 +67,7 @@ public class VentanaPrincipal extends JFrame {
 		return panel;
 	}
 	
-	
+
 	public static JButton boton(String texto,Color color) {
 		JButton b = new JButton(texto);
 		b.setBackground(color);
@@ -83,8 +75,7 @@ public class VentanaPrincipal extends JFrame {
         b.setFocusPainted(false);
         b.setFont(new Font("SansSerif", Font.PLAIN, 13));
         b.setPreferredSize(new Dimension(0, 45));
-        return b;
-		
+        return b;	
 	}
 	
 	
