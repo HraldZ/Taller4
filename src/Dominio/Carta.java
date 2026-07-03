@@ -12,6 +12,25 @@ public abstract class Carta {
 		this.rareza = rareza;
 		this.tipo = tipo;
 	}
+
+	@Override
+	public String toString() {
+		return  nombre + " | " + rareza + " | " + tipo ;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getRareza() {
+		return rareza;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+	
+	
 	
 	
 	

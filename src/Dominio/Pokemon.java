@@ -9,6 +9,12 @@ public class Pokemon extends Carta {
 		this.dano = dano;
 		this.cantEnergia = cantEnergia;
 	}
+	public int getDano() {
+		return dano;
+	}
+	public int getCantEnergia() {
+		return cantEnergia;
+	}
 	
 	
 	

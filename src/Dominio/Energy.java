@@ -8,4 +8,10 @@ public class Energy extends Carta {
 		super(nombre, rareza, tipo);
 		this.elemento = elemento;
 	}
+
+	public String getElemento() {
+		return elemento;
+	}
+	
+	
 }

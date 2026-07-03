@@ -8,6 +8,10 @@ public class Supporter extends Carta {
 		super(nombre, rareza, tipo);
 		this.efectosPorTurno = efectosPorTurno;
 	}
+
+	public int getEfectosPorTurno() {
+		return efectosPorTurno;
+	}
 	
 	
 	

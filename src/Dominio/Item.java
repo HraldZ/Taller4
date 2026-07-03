@@ -8,6 +8,10 @@ public class Item extends Carta {
 		super(nombre, rareza, tipo);
 		this.bonificacion = bonificacion;
 	}
+
+	public int getBonificacion() {
+		return bonificacion;
+	}
 	
 	
 	
