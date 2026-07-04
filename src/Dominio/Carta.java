@@ -1,10 +1,12 @@
 package Dominio;
+import Visitor.*;
 
 public abstract class Carta {
 
 	protected String nombre;
 	protected int rareza;
 	protected String tipo;
+	public abstract double accept(Visitor visitor);
 	
 	public Carta(String nombre, int rareza, String tipo) {
 		super();

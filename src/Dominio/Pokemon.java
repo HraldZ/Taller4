@@ -1,5 +1,7 @@
 package Dominio;
 
+import Visitor.Visitor;
+
 public class Pokemon extends Carta {
 
 	protected int dano;
@@ -14,6 +16,9 @@ public class Pokemon extends Carta {
 	}
 	public int getCantEnergia() {
 		return cantEnergia;
+	}
+	public double accept(Visitor visitor) {
+		return visitor.visitar(this);
 	}
 	
 	

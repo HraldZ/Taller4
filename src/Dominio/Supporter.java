@@ -1,5 +1,7 @@
 package Dominio;
 
+import Visitor.Visitor;
+
 public class Supporter extends Carta {
 
 	protected int efectosPorTurno;
@@ -11,6 +13,9 @@ public class Supporter extends Carta {
 
 	public int getEfectosPorTurno() {
 		return efectosPorTurno;
+	}
+	public double accept(Visitor visitor) {
+		return visitor.visitar(this);
 	}
 	
 	
