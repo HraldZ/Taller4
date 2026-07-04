@@ -3,7 +3,20 @@ package Logica;
 import java.util.ArrayList;
 import Dominio.*;
 
-public class SistemaImp {
+public class SistemaImp implements Sistema  {
+	private static SistemaImp sis = null;
+	private SistemaImp() {
+		
+	}
+	
+	public static SistemaImp getInstance() {
+		if(sis == null) {
+			sis = new SistemaImp();
+			return sis;
+		}else return sis; 
+		
+		
+	}
 	
 	
 	public static ArrayList<Carta> coleccion = new ArrayList<>();

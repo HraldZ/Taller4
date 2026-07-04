@@ -27,7 +27,7 @@ import Logica.*;
 
 public class VentanaColeccion extends JDialog {
 	
-	private final SistemaImp sistema = new SistemaImp();
+	private final SistemaImp sistema = SistemaImp.getInstance();
 	public static Color azul    = new Color(52, 100, 180);
 	public static Color blanco  = Color.WHITE;
 	private DefaultListModel<String> modeloLista = new DefaultListModel<>();

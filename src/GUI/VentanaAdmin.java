@@ -31,7 +31,7 @@ import Dominio.*;
 
 public class VentanaAdmin extends JDialog {
 	
-	public SistemaImp sistema = new SistemaImp();
+	public SistemaImp sistema = SistemaImp.getInstance();
 	public static Color azul    = new Color(52, 100, 180);
 	public static Color blanco  = Color.WHITE;
 	public DefaultListModel<String> listaP = new DefaultListModel<>();
