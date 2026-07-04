@@ -23,6 +23,9 @@ import javax.swing.ListSelectionModel;
 
 import Dominio.*;
 import Logica.*;
+import Strategy.Strategy;
+import Strategy.StrategyAbc;
+import Visitor.visitarPoder;
 
 
 public class VentanaColeccion extends JDialog {
@@ -61,21 +64,61 @@ public class VentanaColeccion extends JDialog {
 		JButton rareza  = boton("Rareza",azul);
         JButton nombre  = boton("Nombre",azul);
         JButton poder   = boton("Poder",azul);
-        JButton actualizar = boton("Actualizar",azul);
+       
+        
+        
+        
+        
+        nombre.addActionListener(e->{
+        
+        	SistemaImp.getInstance().OrdenarPorAbc(cartasVisibles);
+        	actualizarLista();
+        });
+        
+        
+        rareza.addActionListener(e->{
+            
+        	SistemaImp.getInstance().OrdenarPorRareza(cartasVisibles);
+        	actualizarLista();
+        });
+        
+        
+        poder.addActionListener(e->{
+            
+        	SistemaImp.getInstance().OrdenarPorPoder(cartasVisibles);
+        	actualizarLista();
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 		
         
         rareza.setPreferredSize(new Dimension(100, 32));
         nombre.setPreferredSize(new Dimension(100, 32));
         poder.setPreferredSize(new Dimension(100, 32));
-        actualizar.setPreferredSize(new Dimension(110, 32));
+       
         
         panelo.add(rareza);
         panelo.add(nombre);
         panelo.add(poder);
-        panelo.add(actualizar);
+        
         return panelo;
-		
+	
+        
+        
+        
+        
+        
+        
 	}
+	
 	
 	private JPanel clickCarta() {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -126,11 +169,22 @@ public class VentanaColeccion extends JDialog {
         modeloLista.clear();
         for (int i = 0; i < cartasVisibles.size(); i++) {
             Carta c = cartasVisibles.get(i);
-            // falta calcular poder
+            //falta calcular poder
             modeloLista.addElement(String.format("%-3d %-28s %-12s Rareza:%-2d  ",
-                    i+1, c.getNombre(), "["+c.getTipo()+"]", c.getRareza()));
+                    i+1, c.getNombre(), "["+c.getTipo()+"]", c.getRareza()) + "Poder : " + c.accept(new visitarPoder()));
         }
         lblTotal.setText("Total: " + cartasVisibles.size() + " cartas");
-    }	
+    }
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

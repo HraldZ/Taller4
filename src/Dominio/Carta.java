@@ -31,6 +31,18 @@ public abstract class Carta {
 	public String getTipo() {
 		return tipo;
 	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setRareza(int rareza) {
+		this.rareza = rareza;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	
 	
 	

@@ -20,6 +20,12 @@ public class Pokemon extends Carta {
 	public double accept(Visitor visitor) {
 		return visitor.visitar(this);
 	}
+	public void setDano(int dano) {
+		this.dano = dano;
+	}
+	public void setCantEnergia(int cantEnergia) {
+		this.cantEnergia = cantEnergia;
+	}
 	
 	
 	

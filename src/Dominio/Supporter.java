@@ -17,6 +17,10 @@ public class Supporter extends Carta {
 	public double accept(Visitor visitor) {
 		return visitor.visitar(this);
 	}
+
+	public void setEfectosPorTurno(int efectosPorTurno) {
+		this.efectosPorTurno = efectosPorTurno;
+	}
 	
 	
 	

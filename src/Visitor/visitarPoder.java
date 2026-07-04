@@ -9,7 +9,8 @@ public class visitarPoder implements Visitor{
 
 	@Override
 	public double visitar(Pokemon pokemon) {
-		return ((double) pokemon.getDano() / pokemon.getCantEnergia()) * 100;
+		Double poder = (((double) pokemon.getDano() / pokemon.getCantEnergia()) * 100);
+		return Math.round(poder);
 	}
 
 	@Override

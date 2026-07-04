@@ -20,6 +20,10 @@ public class Energy extends Carta {
 	public double accept(Visitor visitor) {
 		return visitor.visitar(this);
 	}
+
+	public void setElemento(String elemento) {
+		this.elemento = elemento;
+	}
 	
 	
 }

@@ -41,7 +41,8 @@ public class VentanaAdmin extends JDialog {
     private JTextField txtRareza  = new JTextField();
     private JComboBox<String> cmbTipo = new JComboBox<>(new String[]{"Pokemon","Item","Supporter","Energy"});
     private JTextField txtDanio, txtCantEnerg, txtBonificacion, txtEfectos, txtElemento;
-    
+    boolean VieneDeSeleccionar = false;
+    String tipo = "Pokemon";
     
 	
 	
@@ -81,7 +82,7 @@ public class VentanaAdmin extends JDialog {
  		
 		JButton agregar  = boton("Agregar", azul);
         JButton eliminar = boton("Eliminar",azul);
-        JButton modificar    = boton("Modificar",azul);
+        JButton modificar = boton("Modificar",azul);
         JButton limpiar  = boton("Limpiar", azul);
 
         agregar.setPreferredSize(new Dimension(110, 36));
@@ -89,13 +90,38 @@ public class VentanaAdmin extends JDialog {
         modificar.setPreferredSize(new Dimension(110, 36));
         limpiar.setPreferredSize(new Dimension(110, 36));
         
+        
+        
+        
+        
         limpiar.addActionListener(e->{
         	limpiar();
+        	
         });
+        
+        
+        
         
         eliminar.addActionListener(e->{
         	eliminar();
+        	
         });
+        
+        
+        
+        
+        agregar.addActionListener(e-> {
+        	agregar();
+        	actualizarLista();
+        });
+        
+        modificar.addActionListener(e-> {
+        	modificar();
+        	actualizarLista();
+        	
+        });
+        
+        
         
 		
         panel3.add(agregar);
@@ -187,8 +213,12 @@ public class VentanaAdmin extends JDialog {
         txtDanio = new JTextField(); txtCantEnerg = new JTextField();
         txtBonificacion = new JTextField(); txtEfectos   = new JTextField();
         txtElemento = new JTextField();
-
-        switch ((String) cmbTipo.getSelectedItem()) {
+        
+        if(VieneDeSeleccionar == false ) {
+         tipo = ((String) cmbTipo.getSelectedItem());
+        }
+        VieneDeSeleccionar = false;
+        switch(tipo)  {
             case "Pokemon":
                 panelAtrib.add(new JLabel("Daño:"));     
                 panelAtrib.add(txtDanio);
@@ -210,6 +240,7 @@ public class VentanaAdmin extends JDialog {
         }
         panelAtrib.revalidate();
         panelAtrib.repaint();
+       
     }
 
 	
@@ -220,19 +251,30 @@ public class VentanaAdmin extends JDialog {
 	        Carta c = sistema.getColeccion().get(idx);
 	        txtNombre.setText(c.getNombre());
 	        txtRareza.setText(String.valueOf(c.getRareza()));
-	        cmbTipo.setSelectedItem(c.getTipo());
+	        cmbTipo.setSelectedItem(capitalizar(c.getTipo()));
 	        atributos();
 	        // Rellenar campos del tipo
+	        VieneDeSeleccionar = true;
 	        if (c instanceof Pokemon) {
+	        	tipo = "Pokemon";
+	        	atributos();
 	            txtDanio.setText(String.valueOf(((Pokemon) c).getDano()));
 	            txtCantEnerg.setText(String.valueOf(((Pokemon) c).getCantEnergia()));
+	            
 	        } else if (c instanceof Item) {
+	        	tipo = "Item";
+	        	atributos();
 	            txtBonificacion.setText(String.valueOf(((Item) c).getBonificacion()));
 	        } else if (c instanceof Supporter) {
+	        	tipo = "Supporter";
+	        	atributos();
 	            txtEfectos.setText(String.valueOf(((Supporter) c).getEfectosPorTurno()));
 	        } else if (c instanceof Energy) {
+	        	tipo = "Energy";
+	        	atributos();
 	            txtElemento.setText(((Energy) c).getElemento());
 	        }
+	        
 	    }
 	
 	
@@ -245,7 +287,7 @@ public class VentanaAdmin extends JDialog {
 	        	}
 	        int c = JOptionPane.showConfirmDialog(this, "Eliminar carta seleccionada?", "Confirmar", JOptionPane.YES_NO_OPTION);
 	        if (c == JOptionPane.YES_OPTION) {
-	            //sistemaImp.eliminarCarta(index, "src/Sobres.txt");
+	            SistemaImp.eliminarCarta(index, "src/Sobres.txt");
 	            actualizarLista();
 	            limpiar();
 	        }
@@ -258,7 +300,146 @@ public class VentanaAdmin extends JDialog {
 	        atributos();
 	        lista.clearSelection();
 	    }
-	
+
+	 private String capitalizar(String texto) {
+		    if (texto == null || texto.isEmpty()) return texto;
+		    return texto.substring(0, 1).toUpperCase() + texto.substring(1).toLowerCase();
+		}
+	 
+	 private void agregar() {
+		    try {
+		        String nombre = txtNombre.getText();
+		        int rareza = Integer.parseInt(txtRareza.getText());
+		        String tipoSeleccionado = (String) cmbTipo.getSelectedItem();
+
+		        if (nombre.isEmpty()) {
+		            JOptionPane.showMessageDialog(this, "Ingresa un nombre.");
+		            return;
+		        }
+
+		        if (rareza < 1 || rareza > 5) {
+		            JOptionPane.showMessageDialog(this, "La rareza debe estar entre 1 y 5.");
+		            return;
+		        }
+
+		        Carta cartaNueva = null;
+
+		        switch (tipoSeleccionado) {
+		            case "Pokemon":
+		                int dano = Integer.parseInt(txtDanio.getText());
+		                int cantEnergia = Integer.parseInt(txtCantEnerg.getText());
+
+		                if (dano < 0) {
+		                    JOptionPane.showMessageDialog(this, "El daño no puede ser negativo.");
+		                    return;
+		                }
+		                if (cantEnergia < 0) {
+		                    JOptionPane.showMessageDialog(this, "La cantidad de energias no puede ser negativa.");
+		                    return;
+		                }
+
+		                cartaNueva = new Pokemon(nombre, rareza, tipoSeleccionado.toLowerCase(), dano, cantEnergia);
+		                break;
+
+		            case "Item":
+		                int bonificacion = Integer.parseInt(txtBonificacion.getText());
+
+		                if (bonificacion < 0) {
+		                    JOptionPane.showMessageDialog(this, "La bonificacion no puede ser negativa.");
+		                    return;
+		                }
+
+		                cartaNueva = new Item(nombre, rareza, tipoSeleccionado.toLowerCase(), bonificacion);
+		                break;
+
+		            case "Supporter":
+		                int efectos = Integer.parseInt(txtEfectos.getText());
+
+		                if (efectos < 0) {
+		                    JOptionPane.showMessageDialog(this, "Los efectos por turno no pueden ser negativos.");
+		                    return;
+		                }
+
+		                cartaNueva = new Supporter(nombre, rareza, tipoSeleccionado.toLowerCase(), efectos);
+		                break;
+
+		            case "Energy":
+		                String elemento = txtElemento.getText();
+		                cartaNueva = new Energy(nombre, rareza, tipoSeleccionado.toLowerCase(), elemento);
+		                break;
+		        }
+
+		        sistema.agregarCarta(cartaNueva);
+		        SistemaImp.guardarCambiosCartas();
+		        actualizarLista();
+		        limpiar();
+
+		    } catch (NumberFormatException e) {
+		        JOptionPane.showMessageDialog(this, "Revisa que Rareza y los atributos numericos sean numeros validos.");
+		    }
+		}
+	 private void modificar() {
+		    int idx = lista.getSelectedIndex();
+		    if (idx < 0) {
+		        JOptionPane.showMessageDialog(this, "Selecciona una carta para modificar.");
+		        return;
+		    }
+
+		    try {
+		        Carta c = sistema.getColeccion().get(idx);
+
+		        if (c instanceof Pokemon) {
+		            Pokemon p = (Pokemon) c;
+		            int dano = Integer.parseInt(txtDanio.getText());
+		            int cantEnergia = Integer.parseInt(txtCantEnerg.getText());
+
+		            if (dano < 0) {
+		                JOptionPane.showMessageDialog(this, "El daño no puede ser negativo.");
+		                return;
+		            }
+		            if (cantEnergia < 0) {
+		                JOptionPane.showMessageDialog(this, "La cantidad de energías no puede ser negativa.");
+		                return;
+		            }
+
+		            p.setDano(dano);
+		            p.setCantEnergia(cantEnergia);
+
+		        } else if (c instanceof Item) {
+		            Item item = (Item) c;
+		            int bonificacion = Integer.parseInt(txtBonificacion.getText());
+
+		            if (bonificacion < 0) {
+		                JOptionPane.showMessageDialog(this, "La bonificación no puede ser negativa.");
+		                return;
+		            }
+
+		            item.setBonificacion(bonificacion);
+
+		        } else if (c instanceof Supporter) {
+		            Supporter s = (Supporter) c;
+		            int efectos = Integer.parseInt(txtEfectos.getText());
+
+		            if (efectos < 0) {
+		                JOptionPane.showMessageDialog(this, "Los efectos por turno no pueden ser negativos.");
+		                return;
+		            }
+
+		            s.setEfectosPorTurno(efectos);
+
+		        } else if (c instanceof Energy) {
+		            Energy en = (Energy) c;
+		            en.setElemento(txtElemento.getText());
+		        }
+
+		        SistemaImp.guardarCambiosCartas();
+		        actualizarLista();
+		        JOptionPane.showMessageDialog(this, "Carta modificada correctamente.");
+
+		    } catch (NumberFormatException e) {
+		        JOptionPane.showMessageDialog(this, "Revisa que los atributos numéricos sean válidos.");
+		    }
+		}
 	
 	
 	

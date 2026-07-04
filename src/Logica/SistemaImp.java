@@ -1,7 +1,14 @@
 package Logica;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import Dominio.*;
+import Strategy.Strategy;
+import Strategy.StrategyAbc;
+import Strategy.StrategyPoder;
+import Strategy.StrategyRareza;
 
 public class SistemaImp implements Sistema  {
 	private static SistemaImp sis = null;
@@ -28,7 +35,71 @@ public class SistemaImp implements Sistema  {
 	public ArrayList<Carta> getColeccion() {
 		return coleccion;
 	}
+
+	public static void eliminarCarta(int index, String string) {
+		coleccion.remove(index);
+		guardarCambiosCartas();
+		
+		
+	}
 	
+	public void OrdenarPorAbc(ArrayList<Carta> cartas ) {
+		Strategy estrategia = new StrategyAbc();
+		estrategia.Ordenar(cartas);
+	}
+	public void OrdenarPorPoder(ArrayList<Carta> cartas ) {
+		Strategy estrategia = new StrategyPoder();
+		estrategia.Ordenar(cartas);
+	}
+	
+	public void OrdenarPorRareza(ArrayList<Carta> cartas ) {
+		Strategy estrategia = new StrategyRareza();
+		estrategia.Ordenar(cartas);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void guardarCambiosCartas() {
+
+		try {
+			BufferedWriter escritor = new BufferedWriter(new FileWriter("src/Sobres.txt"));
+
+			for (int i = 0; i < SistemaImp.getInstance().getColeccion() .size(); i++) {
+				Carta carta = SistemaImp.getInstance().getColeccion().get(i);
+
+				escritor.write(carta.getNombre() + ";" + carta.getRareza() + ";" + carta.getTipo());
+
+				if (carta instanceof Pokemon) {
+					Pokemon pokemon = (Pokemon) carta;
+					escritor.write(";" + pokemon.getDano() + ";" + pokemon.getCantEnergia());
+
+				} else if (carta instanceof Item) {
+					Item item = (Item) carta;
+					escritor.write(";" + item.getBonificacion());
+
+				} else if (carta instanceof Supporter) {
+					Supporter supporter = (Supporter) carta;
+					escritor.write(";" + supporter.getEfectosPorTurno());
+
+				} else if (carta instanceof Energy) {
+					Energy energy = (Energy) carta;
+					escritor.write(";" + energy.getElemento());
+				}
+
+				escritor.newLine();
+			}
+
+			escritor.close();
+		} catch (IOException e) {
+			e.getMessage();
+		}
+	}
 	
 	
 	

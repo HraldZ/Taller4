@@ -1,8 +1,6 @@
 package Strategy;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import Dominio.Carta;
 
@@ -10,13 +8,18 @@ public class StrategyRareza implements Strategy{
 
 	@Override
 	public void Ordenar(ArrayList<Carta> cartas) {
-	    Collections.sort(cartas, new Comparator<Carta>() {
-	        @Override
-	        public int compare(Carta c1, Carta c2) {
-	            return Integer.compare(c2.getRareza(), c1.getRareza());
-	        }
-	    });
+		int n = cartas.size();
+
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - 1 - i; j++) {
+				Carta actual = cartas.get(j);
+				Carta siguiente = cartas.get(j + 1);
+				if (actual.getRareza() < siguiente.getRareza()) {
+					cartas.set(j, siguiente);
+					cartas.set(j + 1, actual);
+				}
+			}
+		}
 	}
-	
 
 }

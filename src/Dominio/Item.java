@@ -17,6 +17,11 @@ public class Item extends Carta {
 	public double accept(Visitor visitor) {
 		return visitor.visitar(this);
 	}
+
+	public void setBonificacion(int bonificacion) {
+		this.bonificacion = bonificacion;
+	}
+	
 	
 	
 	
