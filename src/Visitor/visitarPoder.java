@@ -8,12 +8,14 @@ import Dominio.Supporter;
 public class visitarPoder implements Visitor{
 
 	@Override
+	//visitarPoder Implementando sobrecarga de metodos para poder cumplir el formato necesario de el patron de diseño visitor(depende de el objeto que acepte)
 	public double visitar(Pokemon pokemon) {
 		Double poder = (((double) pokemon.getDano() / pokemon.getCantEnergia()) * 100);
 		return Math.round(poder);
 	}
 
 	@Override
+	
 	public double visitar(Item item) {
 		return item.getBonificacion() * 20;
 	}

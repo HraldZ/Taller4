@@ -3,10 +3,11 @@ package Strategy;
 import java.util.ArrayList;
 
 import Dominio.Carta;
-
+//strategy ocupando la rareza de la carta entre mayor sea la rareza mas arriba de la lista ira.
 public class StrategyRareza implements Strategy{
 
 	@Override
+	//metodo ordenar con sobrecarga de metodos.
 	public void Ordenar(ArrayList<Carta> cartas) {
 		int n = cartas.size();
 

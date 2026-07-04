@@ -11,27 +11,22 @@ import Strategy.StrategyPoder;
 import Strategy.StrategyRareza;
 
 public class SistemaImp implements Sistema  {
+	
+	//instancia del singleton
 	private static SistemaImp sis = null;
 	private SistemaImp() {
-		
 	}
-	
 	public static SistemaImp getInstance() {
 		if(sis == null) {
 			sis = new SistemaImp();
 			return sis;
 		}else return sis; 
-		
-		
 	}
 	
-	
+	//coleccion de cartas 
 	public static ArrayList<Carta> coleccion = new ArrayList<>();
-	
-	public void agregarCarta(Carta carta) {
-		coleccion.add(carta);
-	}
 
+	//getter de la coleccion
 	public ArrayList<Carta> getColeccion() {
 		return coleccion;
 	}
@@ -42,16 +37,17 @@ public class SistemaImp implements Sistema  {
 		
 		
 	}
-	
+	//strategy instanciado en el sistema, publico para ser ocupado en gui.
 	public void OrdenarPorAbc(ArrayList<Carta> cartas ) {
 		Strategy estrategia = new StrategyAbc();
 		estrategia.Ordenar(cartas);
 	}
+	//strategy instanciado en el sistema, publico para ser ocupado en gui.
 	public void OrdenarPorPoder(ArrayList<Carta> cartas ) {
 		Strategy estrategia = new StrategyPoder();
 		estrategia.Ordenar(cartas);
 	}
-	
+	//strategy instanciando en el sistema, publico para ser ocupado en gui.
 	public void OrdenarPorRareza(ArrayList<Carta> cartas ) {
 		Strategy estrategia = new StrategyRareza();
 		estrategia.Ordenar(cartas);
@@ -64,7 +60,8 @@ public class SistemaImp implements Sistema  {
 	
 	
 	
-	
+	//sobreescritura de el archivo sobres.txt consta de un ciclo pasando por toda la arraylist y buscando la instancia de el tipo de carta asi sobreescribiendo
+	//dependiendo de sus extra atributos 
 	public static void guardarCambiosCartas() {
 
 		try {

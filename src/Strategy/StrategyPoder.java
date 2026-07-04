@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import Dominio.Carta;
 import Visitor.*;
 
-/**
- * Estrategia concreta que ordena las cartas por su poder calculado
- * (de mayor a menor), usando un ordenamiento burbuja manual.
- * El poder de cada carta se obtiene mediante un Visitor.
- */
+// estrategia concreta que ordena las cartas por su poder calculado
+ //el poder de cada carta se obtiene mediante un Visitor
 public class StrategyPoder implements Strategy {
 
 	@Override
+	//metodo ordenar ocupado con sobrecarga de metodos
 	public void Ordenar(ArrayList<Carta> cartas) {
 		Visitor visitor = new visitarPoder();
 		int n = cartas.size();
@@ -24,8 +22,6 @@ public class StrategyPoder implements Strategy {
 
 				double poderActual = actual.accept(visitor);
 				double poderSiguiente = siguiente.accept(visitor);
-
-				// Si la actual tiene menor poder que la siguiente, se intercambian
 				if (poderActual < poderSiguiente) {
 					cartas.set(j, siguiente);
 					cartas.set(j + 1, actual);

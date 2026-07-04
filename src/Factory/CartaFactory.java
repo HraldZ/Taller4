@@ -1,9 +1,12 @@
 package Factory;
 
 import Dominio.*;
-
+//patron de diseño factory implementado para crear objetos de muchos tipos.
 public class CartaFactory {
 	
+//metodo de creacion de cartas ocupado en la lectura de archivos en el main donde le pasas la linea que lee en el archivo. 
+	
+// Consta de un switch comparando el tipo de este y asi eligiendo el objeto que creara.
 public static Carta CrearCartas(String linea) {
 	String[] partes = linea.split(";");
 	String nombre = partes[0];

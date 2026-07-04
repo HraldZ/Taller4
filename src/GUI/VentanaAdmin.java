@@ -45,7 +45,7 @@ public class VentanaAdmin extends JDialog {
     String tipo = "Pokemon";
     
 	
-	
+	//Ventana principal de administrador donde se tendra que crear los botones y hacerlos visibles
 	VentanaAdmin(JFrame padre) {
 		super(padre,"Admin",false);
 		setSize(800,500);
@@ -65,18 +65,7 @@ public class VentanaAdmin extends JDialog {
 		
 		setVisible(true);
 	}
-	
-	public JPanel panelDatos() {
-		JPanel panel1 = new JPanel();
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos de la carta"));
-		GridBagConstraints grid = new GridBagConstraints();
-		grid.insets = new Insets(4,6,4,6);
-		grid.fill = GridBagConstraints.HORIZONTAL;
-		
-		return panel1;
-	}
-	
-	
+	//panel para crear los botones modificar, agregar, limpiar, eliminar y añadirlos a la gui
 	public JPanel panelBotones() {
 		JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,4));
  		
@@ -131,7 +120,7 @@ public class VentanaAdmin extends JDialog {
         
         return panel3;
 	}
-	
+	//crear los botones de una forma mas amigable de tal forma que se pueda elegir su color, forma  y dimensiones en la pantalla
 	public JButton boton(String texto,Color color) {
 		JButton b = new JButton(texto);
 		b.setBackground(color);
@@ -142,7 +131,7 @@ public class VentanaAdmin extends JDialog {
         return b;
 		
 	}
-	
+	//panel de las cartas en coleccion
 	private JPanel panelLista() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Cartas en coleccion"));
@@ -152,7 +141,7 @@ public class VentanaAdmin extends JDialog {
 		panel.add(new JScrollPane(lista), BorderLayout.CENTER);
 		return panel;
 	}
-	
+	//mostrar la lista actualizada con los cambios correspondientes
 	public void actualizarLista() {
 		listaP.clear();
 		ArrayList<Carta> coleccion = sistema.getColeccion();
@@ -162,7 +151,7 @@ public class VentanaAdmin extends JDialog {
 		
 	}
 	
-	
+	//crear el panel 
 	private JPanel crearPanelFormulario() {
         JPanel p = new JPanel(new GridBagLayout());
         p.setBorder(BorderFactory.createTitledBorder("Datos de la carta"));
@@ -197,7 +186,7 @@ public class VentanaAdmin extends JDialog {
         grid.weightx=1; 
         p.add(cmbTipo, grid);
 
-        
+        //extras
         panelAtrib.setBorder(BorderFactory.createTitledBorder("Atributos del tipo"));
         grid.gridx=0; 
         grid.gridy=3; 
@@ -207,7 +196,7 @@ public class VentanaAdmin extends JDialog {
 
         return p;
     }
-	
+	//Panel donde cambias los atributos extra por cada tipo de carta
 	private void atributos() {
         panelAtrib.removeAll();
         txtDanio = new JTextField(); txtCantEnerg = new JTextField();
@@ -243,7 +232,7 @@ public class VentanaAdmin extends JDialog {
        
     }
 
-	
+	// sirve para poder seleccionar un pokemon, ver sus atributos y poder cambiarlos dependiendo de la necesidad de cada uno
 	 private void alSeleccionar(ListSelectionEvent e) {
 	        if (e.getValueIsAdjusting()) return;
 	        int idx = lista.getSelectedIndex();
@@ -278,7 +267,7 @@ public class VentanaAdmin extends JDialog {
 	    }
 	
 	
-	
+	//metodo para eliminar el pokemon que sea seleccionado
 	 private void eliminar() {
 	        int index = lista.getSelectedIndex();
 	        if (index < 0) { 
@@ -293,19 +282,20 @@ public class VentanaAdmin extends JDialog {
 	        }
 	    }
 	
-	
+	//metodo para limpiar los cuadros de texto que tengan opciones modificables 
 	 private void limpiar() {
 	        txtNombre.setText(""); txtRareza.setText("");
 	        cmbTipo.setSelectedIndex(0);
 	        atributos();
 	        lista.clearSelection();
 	    }
-
+	 //metodo para arreglar un bug que no permitia que se cambien los cuadros de texto, de lo que consta el metodo es que tu le pasas tu
+	 //texto y pone la primera letra en mayuscula
 	 private String capitalizar(String texto) {
 		    if (texto == null || texto.isEmpty()) return texto;
 		    return texto.substring(0, 1).toUpperCase() + texto.substring(1).toLowerCase();
 		}
-	 
+	//metodo para agregar un nuevo pokemon al arraylist  
 	 private void agregar() {
 		    try {
 		        String nombre = txtNombre.getText();
@@ -369,7 +359,7 @@ public class VentanaAdmin extends JDialog {
 		                break;
 		        }
 
-		        sistema.agregarCarta(cartaNueva);
+		        SistemaImp.getInstance().getColeccion().add(cartaNueva);
 		        SistemaImp.guardarCambiosCartas();
 		        actualizarLista();
 		        limpiar();
@@ -378,6 +368,7 @@ public class VentanaAdmin extends JDialog {
 		        JOptionPane.showMessageDialog(this, "Revisa que Rareza y los atributos numericos sean numeros validos.");
 		    }
 		}
+	 //metodo para modificar una carta seleccionada, consta de buscar la instancia de la carta para confirmar los cambios y setearlos  
 	 private void modificar() {
 		    int idx = lista.getSelectedIndex();
 		    if (idx < 0) {

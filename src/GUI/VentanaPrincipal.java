@@ -16,15 +16,38 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Logica.SistemaImp;
+
 
 
 public class VentanaPrincipal extends JFrame {
+	//instancia de singleton
+	private static VentanaPrincipal ventana = null;
+	public static VentanaPrincipal getInstance() {
+		if(ventana == null) {
+			ventana = new VentanaPrincipal();
+			return ventana;
+		}else return ventana; 
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public static Color blanco  = Color.WHITE;
 	public static Color azul    = new Color(52, 100, 180);
 	
-
-	public VentanaPrincipal() throws HeadlessException {
+	//crea la ventana añadiendo asi la gui implementada 
+	private VentanaPrincipal() throws HeadlessException {
 		super("Pokemon TGC");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 280);
@@ -33,7 +56,7 @@ public class VentanaPrincipal extends JFrame {
 
         setContentPane(createGui());
 	}
-
+	//crea el panel y muestra los 2 botones disponibles
 	public JPanel createGui() {
 		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBackground(blanco);
@@ -67,7 +90,7 @@ public class VentanaPrincipal extends JFrame {
 		return panel;
 	}
 	
-
+	//reduciendo codigo para no hacer mas acomple del necesario, mostrando asi un codigo mas limpio
 	public static JButton boton(String texto,Color color) {
 		JButton b = new JButton(texto);
 		b.setBackground(color);

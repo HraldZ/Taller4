@@ -1,9 +1,9 @@
 package Dominio;
 
 import Visitor.Visitor;
-
+//clase de herencia a carta  
 public class Pokemon extends Carta {
-
+//variables extra de esta clase 
 	protected int dano;
 	protected int cantEnergia;
 	public Pokemon(String nombre, int rareza, String tipo, int dano, int cantEnergia) {
@@ -11,6 +11,7 @@ public class Pokemon extends Carta {
 		this.dano = dano;
 		this.cantEnergia = cantEnergia;
 	}
+	//getters and setters y su correspondiente visitor
 	public int getDano() {
 		return dano;
 	}

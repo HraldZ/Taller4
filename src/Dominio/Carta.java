@@ -1,11 +1,12 @@
 package Dominio;
 import Visitor.*;
-
+//clase abstracta, el primer objeto donde salen herencias de este
 public abstract class Carta {
-
+	//variables que contiene este objeto
 	protected String nombre;
 	protected int rareza;
 	protected String tipo;
+	//la forma de aceptar la visita del patron de diseño visitor
 	public abstract double accept(Visitor visitor);
 	
 	public Carta(String nombre, int rareza, String tipo) {
@@ -16,6 +17,7 @@ public abstract class Carta {
 	}
 
 	@Override
+	// getters setter y el to string
 	public String toString() {
 		return  nombre + " | " + rareza + " | " + tipo ;
 	}

@@ -56,7 +56,7 @@ public class VentanaColeccion extends JDialog {
 
 	}
 
-	
+	//crea el panel con los botones para ordenar dependiendo de su rareza nombre o poder, seteando asi el tamaño de los botones y la forma en que se implementaran
 	private JPanel panelOrdenar() {
 		JPanel panelo = new JPanel( new FlowLayout());
 		panelo.setBorder(BorderFactory.createTitledBorder("Ordenar por"));
@@ -119,7 +119,7 @@ public class VentanaColeccion extends JDialog {
         
 	}
 	
-	
+	//sirve para detallar el funcionamiento de una carta asi mismo agregando una imagen y mostrando todos sus atributos disponibles
 	private JPanel clickCarta() {
 		JPanel panel = new JPanel(new BorderLayout());
 		
@@ -131,7 +131,7 @@ public class VentanaColeccion extends JDialog {
 		return panel;
 			
 	}
-	
+	//este metodo consta de la creacion de el panel que contiene las listas
 	private JScrollPane crearPanelLista() {
         lista.setFont(new Font("Monospaced", Font.PLAIN, 12));
         lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -141,14 +141,14 @@ public class VentanaColeccion extends JDialog {
             public void mouseClicked(MouseEvent e) {
                 int idx = lista.locationToIndex(e.getPoint());
                 if (idx >= 0 && idx < cartasVisibles.size()) {
-                    //new DialogDetalle(padre, cartasVisibles.get(idx));
+                   //HECHO POR JOAN //new DialogDetalle(padre, cartasVisibles.get(idx));
                 }
             }
         });
 
         return new JScrollPane(lista);
     }
-	
+	//este metodo funciona para darle un tamaño forma y color a los botones por defecto haciendo el codigo mas facil teniendo menos acople de codigo
 	public static JButton boton(String texto,Color color) {
 		JButton b = new JButton(texto);
 		b.setBackground(color);
@@ -159,17 +159,16 @@ public class VentanaColeccion extends JDialog {
         return b;
 		
 	}
-	
+	//muestra las cartas visibles de la arraylist sin ningun orden real 
 	private void cargarSinOrden() {
         cartasVisibles = new ArrayList<>(sistema.getColeccion());
         actualizarLista();
     }
-	
+	// muestra la lista pero de forma actualizada dependiendo de los cambios que se le hayan hecho (algun ordenamiento)
 	private void actualizarLista() {
         modeloLista.clear();
         for (int i = 0; i < cartasVisibles.size(); i++) {
             Carta c = cartasVisibles.get(i);
-            //falta calcular poder
             modeloLista.addElement(String.format("%-3d %-28s %-12s Rareza:%-2d  ",
                     i+1, c.getNombre(), "["+c.getTipo()+"]", c.getRareza()) + "Poder : " + c.accept(new visitarPoder()));
         }
