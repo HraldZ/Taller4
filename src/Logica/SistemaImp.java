@@ -33,9 +33,7 @@ public class SistemaImp implements Sistema  {
 
 	public static void eliminarCarta(int index, String string) {
 		coleccion.remove(index);
-		guardarCambiosCartas();
-		
-		
+		guardarCambiosCartas();	
 	}
 	//strategy instanciado en el sistema, publico para ser ocupado en gui.
 	public void OrdenarPorAbc(ArrayList<Carta> cartas ) {
@@ -52,11 +50,6 @@ public class SistemaImp implements Sistema  {
 		Strategy estrategia = new StrategyRareza();
 		estrategia.Ordenar(cartas);
 	}
-	
-	
-	
-	
-	
 	
 	
 	
