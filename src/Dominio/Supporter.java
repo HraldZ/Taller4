@@ -4,7 +4,7 @@ import Visitor.Visitor;
 //clase herencia supporter
 public class Supporter extends Carta {
 //variables extra
-	protected int efectosPorTurno;
+	private int efectosPorTurno;
 //constructor
 	public Supporter(String nombre, int rareza, String tipo, int efectosPorTurno) {
 		super(nombre, rareza, tipo);

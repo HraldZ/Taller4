@@ -4,7 +4,7 @@ import Visitor.Visitor;
 //clase herencia item
 public class Item extends Carta {
 //variables extra
-	protected int bonificacion;
+	private int bonificacion;
 //constructor de item
 	public Item(String nombre, int rareza, String tipo, int bonificacion) {
 		super(nombre, rareza, tipo);

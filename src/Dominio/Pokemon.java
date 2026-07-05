@@ -4,8 +4,8 @@ import Visitor.Visitor;
 //clase de herencia a carta  
 public class Pokemon extends Carta {
 //variables extra de esta clase 
-	protected int dano;
-	protected int cantEnergia;
+	private int dano;
+	private int cantEnergia;
 	public Pokemon(String nombre, int rareza, String tipo, int dano, int cantEnergia) {
 		super(nombre, rareza, tipo);
 		this.dano = dano;

@@ -5,7 +5,7 @@ import Visitor.Visitor;
 //clase herencia energy
 public class Energy extends Carta {
 //variables extra
-	protected String elemento;
+	private String elemento;
 //constructor
 	public Energy(String nombre, int rareza, String tipo, String elemento) {
 		super(nombre, rareza, tipo);
